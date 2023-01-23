@@ -1,0 +1,107 @@
+<div>
+  <input type="text" class="ip" placeholder="Search Anything Here.." />
+</div>
+<br />
+<!-- <p *ngFor="let uu of userlist"> -->
+<div id="accordion">
+  <div class="card" *ngFor="let uu of userlist">
+    <div class="card-header">
+      <p class="form-check form-switch d-flex" *ngIf="uu.status === true">
+        <input
+          class="form-check-input btn btn-success form-check-input1"
+          type="checkbox"
+          style="background-color: green"
+          role="switch"
+          checked
+          id="switchCheckDefault"
+          (click)="toggleStatus(uu._id, false)"
+        />
+      </p>
+      <p class="form-check form-switch" *ngIf="uu.status === false">
+        <input
+          class="form-check-input form-check-input1 toggle"
+          type="checkbox"
+          role="switch"
+          id="switchCheckDefault"
+          (click)="toggleStatus(uu._id, true)"
+        />
+      </p>
+      <a class="btn" data-bs-toggle="collapse" href="#{{ uu.name }}">
+        {{ uu.name }}
+      </a>
+    </div>
+    <div id="{{ uu.name }}" class="collapse show" data-bs-parent="#accordion">
+      <div class="card-body">
+        <div
+          style="
+            display: flex;
+            justify-content: space-evenly;
+            font-size: 18px;
+            margin-left: 36px;
+          "
+        >
+          <div>Visible</div>
+          <div>Read</div>
+          <div>Write</div>
+        </div>
+        <h6>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="35"
+            height="35"
+            fill="currentColor"
+            class="bi bi-person"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"
+            /></svg
+          >{{ this.role }}
+        </h6>
+        <div style="display: flex; justify-content: space-evenly">
+          <div class="form-check form-switch">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              style="height: 26px; width: 50px"
+              role="switch"
+              id="switchCheckChecked"
+              checked
+            />
+          </div>
+
+          <div class="form-check form-switch">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              style="height: 26px; width: 50px"
+              role="switch"
+              id="switchCheckChecked"
+              checked
+            />
+          </div>
+          <div class="form-check form-switch">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              style="height: 26px; width: 50px"
+              role="switch"
+              id="switchCheckChecked"
+              checked
+            />
+          </div>
+          <div class="form-check form-switch">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              style="height: 26px; width: 50px"
+              role="switch"
+              id="switchCheckChecked"
+              checked
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,150 @@
+<link
+  href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+  rel="stylesheet"
+/>
+<div class="row d-flex">
+  <div class="col-md-12 col-lg-12 col-xxxl-6">
+    <!-- <button (click)="openWindowForm()" nbButton>Open window form</button> -->
+    <!-- <nb-card-header>Create User Role</nb-card-header> -->
+    <form [formGroup]="myForm" (ngSubmit)="postData()">
+      <div class="row g-3">
+        <div class="col">
+          <div class="mb-3">
+            <div class="form-group">
+              <label>User Role</label>
+
+              <input
+                type="text"
+                class="form-control"
+                style="border: none"
+                id="name"
+                formControlName="name"
+              />
+              <div
+                class="form-control is-invalid"
+                *ngIf="fdata['name'].invalid && fdata['name'].touched"
+              >
+                <div
+                  *ngIf="
+                    fdata['name'].errors && fdata['name'].errors['required']
+                  "
+                >
+                  Please Enter name
+                </div>
+                <div
+                  *ngIf="
+                    fdata['name'].errors && fdata['name'].errors['pattern']
+                  "
+                >
+                  name is not Valid!!
+                </div>
+                <div
+                  *ngIf="
+                    fdata['name'].errors && fdata['name'].errors['minlength']
+                  "
+                >
+                  enter more than 2 characters!!
+                </div>
+                <div
+                  *ngIf="
+                    fdata['name'].errors && fdata['name'].errors['maxlength']
+                  "
+                >
+                  Name should be less than 20 characters!!
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="mb-1">
+            <button
+              type="submit"
+              class="btn btn-success"
+              [disabled]="myForm.invalid"
+            >
+              Add
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+    <!-- <button (click)="openWindow(contentTemplate)" nbButton>Create User Role</button> -->
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <h3>List Of Roles</h3>
+    <div class="col-12">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Sr No</th>
+            <th scope="col">UserRole</th>
+            <!-- <th scope="col">Status</th> -->
+
+            <th scope="col">Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let u of UsersRoleList; let indexOfelement = index">
+            <th scope="row">{{ indexOfelement + 1 }}</th>
+            <td>{{ u.name }}</td>
+            <!-- <td>{{u.status}}</td> -->
+            <td>
+              <p class="form-check form-switch" *ngIf="u.status === true">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  role="switch"
+                  style="margin-left: 14px; height: 25px; width: 69px"
+                  checked
+                  id="switchCheckDefault"
+                  (click)="toggleStatus(u._id, false)"
+                />
+              </p>
+              <p class="form-check form-switch" *ngIf="u.status === false">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  role="switch"
+                  id="switchCheckDefault"
+                  (click)="toggleStatus(u._id, true)"
+                  style="margin-left: 14px; height: 25px; width: 69px"
+                />
+              </p>
+            </td>
+            <a
+              (click)="deleteUserRole(u._id)"
+              type="button"
+              class="table-link danger"
+            >
+              <span class="fa-stack">
+                <i class="fa fa-square fa-stack-2x"></i>
+                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+            <a
+              routerLink="/pages/ui-features/managerole/{{ u._id }}"
+              type="button"
+              class="btn btn-primary"
+              class="table-link"
+            >
+              <span class="fa-stack">
+                <i class="fa fa-square fa-stack-2x"></i>
+                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+            <!-- <td>
+      
+                    
+                  <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                  </td> -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
